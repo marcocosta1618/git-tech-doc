@@ -1,0 +1,40 @@
+@import "mixins&vars";
+
+.header {
+    border: 1px solid $background;
+    padding: 0.25em 2rem;
+    margin: 1em 0 0.75em;
+    background-color: $purple1;
+}
+
+.header-l {
+    display: flex;
+    justify-content: space-between;
+    font-size: 2.5em;
+}
+
+.header-m {
+    font-size: 1.8em;
+    background-color: $purple2;
+}
+
+.header-s {
+    font-size: 1.3em;
+    background-color: $background;
+    text-decoration: underline;
+}
+
+@media only screen and (max-width: $large) {
+    .header {
+        padding: 0.25em 1rem;
+    }
+    .header-l {
+        font-size: 2.1em;
+    }
+    .header-m {
+        font-size: 1.4em;
+    }
+    .header-s {
+        font-size: 1.2em;
+    }
+}

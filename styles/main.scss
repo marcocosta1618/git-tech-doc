@@ -1,0 +1,115 @@
+// imports:
+@import "mixins&vars";
+@import "navbar";
+@import "headers";
+@import "hamburger";
+@import "code";
+@import "footer";
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: "Open Sans", sans-serif;
+    background-color: #f3f3f3;
+}
+
+#main-doc {
+    position: absolute;
+    top: 0;
+    left: 360px;
+    // no margin on first header
+    section:first-child {
+        header {
+            margin-top: 0;
+        }
+    }
+    ol,
+    ul {
+        line-height: 1.6;
+        text-align: justify;
+        list-style-type: disc;
+        margin: 0 3.5em;
+        li {
+            padding: 0.3em 0;
+        }
+    }
+}
+.anchor {
+    display: block;
+    visibility: hidden;
+    height: 0;
+    margin-top: 0px;
+}
+.anchor-small {
+    display: block;
+    visibility: hidden;
+    height: 0;
+    margin-top: 50px;
+}
+p {
+    line-height: 1.6;
+    text-align: justify;
+    padding: 0.5em 2rem;
+}
+
+// git logo div:
+.logo-div {
+    display: inline-block;
+    align-self: center;
+    width: 100px;
+    height: 42px;
+    img {
+        max-width: 100px;
+    }
+}
+
+@media only screen and (max-width: $large) {
+    #main-doc {
+        top: 62px;
+        left: 0;
+        ol,
+        ul {
+            margin: 0 2.5em;
+        }
+    }
+    p {
+        font-size: 0.95em;
+        padding: 0.5em 0.9rem;
+    }
+    .anchor {
+        height: 28px;
+        margin-top: -28px;
+    }
+    .anchor-small {
+        height: 62px;
+        margin-top: -62px;
+    }
+    // first header anchor (span)
+    #What_is_version_control\? {
+        height: 62px;
+        margin-top: -62px;
+    }
+    .logo-div {
+        align-self: flex-end;
+        width: 75px;
+        height: 42px;
+        img {
+            max-width: 75px;
+        }
+    }
+}
+
+@media only screen and (max-width: $x-small) {
+    .logo-div {
+        display: none;
+        img {
+            display: none;
+        }
+    }
+}

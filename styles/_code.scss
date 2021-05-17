@@ -1,0 +1,29 @@
+/* inline code */
+code {
+    display: inline-block;
+    font-family: "Source Code Pro", monospace;
+    padding: 0px 0.5em;
+    background-color: #d6d6d6;
+    /* prevent code to wrap at the end of div container */
+    //white-space: nowrap;
+}
+
+
+/* div of code */
+.code-box {
+    margin: 20px auto;
+    padding: 0.5em 1em;
+    max-width: 56vw;
+    /* make code inside div scrollable if overflowing */
+    overflow-x: scroll;
+    background-color: #d6d6d6;
+    code {
+        margin-right: 1em;
+    }
+}
+
+@media only screen and (max-width: $large) {
+    .code-box {
+        max-width: 75vw;
+    }
+}

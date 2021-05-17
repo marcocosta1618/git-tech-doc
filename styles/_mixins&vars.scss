@@ -1,0 +1,20 @@
+// mixins:
+// border:
+@mixin border($col) {
+    border: 1px solid $col;
+}
+
+// variables:
+// colors:
+$background: #f3f3f3;
+$purple1: #cd96fa;
+$purple2: #e5c7fe;
+$green1: #a9e8be;
+$green2: #d4f7e0;
+$green3: #6dc181;
+$black: #333;
+
+
+// media queries breakpoints:
+$large: 62em;         //992px
+$x-small: 26.5625em;  //425px

@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Source+Code+Pro&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="https://kit.fontawesome.com/fbdf364255.js" crossorigin="anonymous"></script>
+    <title>Getting started with Git</title>
+</head>
+
+<body>
+
+    <nav id="navbar">
+        <header>Getting started with Git
+            <button class="burger">
+                <div class="line line1"></div>
+                <div class="line line2"></div>
+                <div class="line line3"></div>
+            </button>
+        </header>
+        <ul id="index">
+            <li><a class="nav-link" href="#What_is_version_control?">What is version control?</a></li>
+            <li><a class="nav-link" href="#Setting_up_a_repository">Setting up a repository</a>
+                <ul>
+                    <li><a href="#Initializing_a_new_reopository:_git_init">Initializing a new
+                            repository: git init</a></li>
+                    <li><a href="#Cloning_an_existing_repository:_git_clone">Cloning an existing
+                            repository: git clone</a></li>
+                    <li><a href="#Configuration_&_set_up:_git_config">Configuration & set up: git
+                            config</a></li>
+                </ul>
+            </li>
+            <li><a class="nav-link" href="#Saving_changes">Saving changes</a>
+                <ul>
+                    <li><a href="#git_add">git add</a></li>
+                    <li><a href="#The_staging_area">The staging area</a></li>
+                </ul>
+            </li>
+            <li><a class="nav-link" href="#Inspecting_a_repository">Inspecting a repository</a>
+                <ul>
+                    <li><a href="#git_status">git status</a></li>
+                    <li><a href="#git_log">git log</a></li>
+                </ul>
+            </li>
+            <li><a class="nav-link" href="#Undoing_changes">Undoing changes</a>
+                <ul>
+                    <li><a href="#Finding_what_is_lost:_reviewing_old_commits">Finding what is lost: reviewing old
+                            commits</a></li>
+                    <li><a href="#Viewing_an_old_revision">Viewing an old revision</a></li>
+                    <li><a href="#Undoing_a_committed_snapshot">Undoing a committed snapshot</a></li>
+                    <li><a href="#Undoing_the_last_commit">Undoing the last commit</a></li>
+                </ul>
+            </li>
+            <li><a class="nav-link" href="#Rewriting_history">Rewriting history</a>
+                <ul>
+                    <li><a href="#Changing_the_Last_Commit:_git_commit_--amend">Changing the Last Commit: git commit
+                            --amend</a></li>
+                    <li><a href="#Changing_older_or_multiple_commits">Changing older or multiple commits</a></li>
+                    <li><a href="#The_safety_net:_git_reflog">The safety net: git reflog</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <main id="main-doc">
+        <section class="main-section">
+            <span class="anchor" id="What_is_version_control?"></span>
+            <header class="header header-l">What is version control?<div class="logo-div"><img
+                        src="https://i.postimg.cc/g2g67MnQ/Git-Logo-White.png" alt="The Git Logo"></div>
+            </header>
+            <article>
+                <p>Version control systems are a category of software tools that help a software team manage changes to
+                    source code over time. Version control software keeps track of every modification to the code in a
+                    special kind of database. If a mistake is made, developers can turn back the clock and compare
+                    earlier versions of the code to help fix the mistake while minimizing disruption to all team
+                    members.</p>
+                <p>For almost all software projects, the source code is like the crown jewels - a precious asset whose
+                    value must be protected. For most software teams, the source code is a repository of the invaluable
+                    knowledge and understanding about the problem domain that the developers have collected and refined
+                    through careful effort. Version control protects source code from both catastrophe and the casual
+                    degradation of human error and unintended consequences.</p>
+                <p>Software developers working in teams are continually writing new source code and changing existing
+                    source code. The code for a project, app or software component is typically organized in a folder
+                    structure or "file tree". One developer on the team may be working on a new feature while another
+                    developer fixes an unrelated bug by changing code, each developer may make their changes in several
+                    parts of the file tree.</p>
+                <p>Version control helps teams solve these kinds of problems, tracking every individual change by each
+                    contributor and helping prevent concurrent work from conflicting. Changes made in one part of the
+                    software can be incompatible with those made by another developer working at the same time. This
+                    problem should be discovered and solved in an orderly manner without blocking the work of the rest
+                    of the team. Further, in all software development, any change can introduce new bugs on its own and
+                    new software can't be trusted until it's tested. So testing and development proceed together until a
+                    new version is ready.</p>
+                <p>Good version control software supports a developer's preferred workflow without imposing one
+                    particular way of working. Ideally it also works on any platform, rather than dictate what operating
+                    system or tool chain developers must use. Great version control systems facilitate a smooth and
+                    continuous flow of changes to the code rather than the frustrating and clumsy mechanism of file
+                    locking - giving the green light to one developer at the expense of blocking the progress of others.
+                </p>
+                <p>Software teams that do not use any form of version control often run into problems like not knowing
+                    which changes that have been made are available to users or the creation of incompatible changes
+                    between two unrelated pieces of work that must then be painstakingly untangled and reworked. If
+                    you're a developer who has never used version control you may have added versions to your files,
+                    perhaps with suffixes like "final" or "latest" and then had to later deal with a new final version.
+                    Perhaps you've commented out code blocks because you want to disable certain functionality without
+                    deleting the code, fearing that there may be a use for it later. Version control is a way out of
+                    these problems.</p>
+                <p>Version control software is an essential part of the every-day of the modern software team's
+                    professional practices. Individual software developers who are accustomed to working with a capable
+                    version control system in their teams typically recognize the incredible value version control also
+                    gives them even on small solo projects. Once accustomed to the powerful benefits of version control
+                    systems, many developers wouldn't consider working without it even for non-software projects.</p>
+                <header class="header header-s">Benefits of version control systems</header>
+                <p>Developing software without using version control is risky, like not having backups. Version control
+                    can also enable developers to move faster and it allows software teams to preserve efficiency and
+                    agility as the team scales to include more developers.</p>
+                <p>Version Control Systems (VCS) have seen great improvements over the past few decades and some are
+                    better than others. VCS are sometimes known as SCM (Source Code Management) tools or RCS (Revision
+                    Control System). One of the most popular VCS tools in use today is called Git. Git is a Distributed
+                    VCS, a category known as DVCS, more on that later. Like many of the most popular VCS systems
+                    available today, Git is free and open source. Regardless of what they are called, or which system is
+                    used, the primary benefits you should expect from version control are as follows.</p>
+                <ol>
+                    <li>A complete long-term change history of every file. This means every change made by many
+                        individuals over the years. Changes include the creation and deletion of files as well as edits
+                        to their contents. Different VCS tools differ on how well they handle renaming and moving of
+                        files. This history should also include the author, date and written notes on the purpose of
+                        each change. Having the complete history enables going back to previous versions to help in root
+                        cause analysis for bugs and it is crucial when needing to fix problems in older versions of
+                        software. If the software is being actively worked on, almost everything can be considered an
+                        "older version" of the software.</li>
+                    <li>Branching and merging. Having team members work concurrently is a no-brainer, but even
+                        individuals working on their own can benefit from the ability to work on independent streams of
+                        changes. Creating a "branch" in VCS tools keeps multiple streams of work independent from each
+                        other while also providing the facility to merge that work back together, enabling developers to
+                        verify that the changes on each branch do not conflict. Many software teams adopt a practice of
+                        branching for each feature or perhaps branching for each release, or both. There are many
+                        different workflows that teams can choose from when they decide how to make use of branching and
+                        merging facilities in VCS.</li>
+                    <li>Traceability. Being able to trace each change made to the software and connect it to project
+                        management and bug tracking software, and being able to annotate each change with a
+                        message describing the purpose and intent of the change can help not only with root cause
+                        analysis and other forensics. Having the annotated history of the code at your fingertips when
+                        you are reading the code, trying to understand what it is doing and why it is so designed can
+                        enable developers to make correct and harmonious changes that are in accord with the intended
+                        long-term design of the system. This can be especially important for working effectively with
+                        legacy code and is crucial in enabling developers to estimate future work with any accuracy.
+                    </li>
+                </ol>
+                <p>While it is possible to develop software without using any version control, doing so subjects the
+                    project to a huge risk that no professional team would be advised to accept. So the question is not
+                    whether to use version control but which version control system to use. There are many choices, but
+                    here we are going to focus on just one, Git.</p>
+            </article>
+        </section>
+
+
+        <section class="main-section">
+            <span class="anchor" id="Setting_up_a_repository"></span>
+            <header class="header header-l">Setting up a repository<div class="logo-div"><img
+                        src="https://i.postimg.cc/g2g67MnQ/Git-Logo-White.png" alt="The Git Logo"></div>
+            </header>
+            <article>
+                <header class="header header-s">What is a Git repository?</header>
+                <p>A Git repository (repo) is a virtual storage of your project. It allows you to save versions of your
+                    code, which you can access when needed.</p>
+                <span class="anchor-small" id="Initializing_a_new_reopository:_git_init"></span>
+                <header class="header header-m">Initializing a new repository: git init</header>
+                <p>To create a new repo, you'll use the <code>git init</code> command. <code>git init</code> is a
+                    one-time command you use during the initial setup of a new repo. Executing this command will create
+                    a new .git subdirectory in your current working directory. This will also create a new master
+                    branch.</p>
+                <header class="header header-s">Versioning an existing project with a new git repository</header>
+                <p>This example assumes you already have an existing project folder that you would like to create a repo
+                    within. You'll first <code>cd</code> to the root project folder and then execute the
+                    <code>git init</code>
+                    command.
+                </p>
+                <div class="code-box">
+                    <code>cd /path/to/your/existing/code git init</code>
+                </div>
+                <p>Pointing <code>git init</code> to an existing project directory will execute the same initialization
+                    setup as mentioned above, but scoped to that project directory.</p>
+                <div class="code-box">
+                    <code>git init</code>
+                </div>
+                <span class="anchor-small" id="Cloning_an_existing_repository:_git_clone"></span>
+                <header class="header header-m">Cloning an existing repository: git clone</header>
+                <p>If a project has already been set up in a central repository, the clone command is the most common
+                    way for users to obtain a local development clone. Like <code>git init</code>, cloning is generally
+                    a one-time operation. Once a developer has obtained a working copy, all version control operations
+                    are managed through their local repository.</p>
+                <div class="code-box">
+                    <code>git clone</code>
+                </div>
+                <p><code>git clone</code> is used to create a copy or clone of remote repositories. You pass
+                    <code>git clone</code> a repository URL. Git supports a few different network protocols and
+                    corresponding URL formats. In this example, we'll be using the Git SSH protocol. Git SSH URLs follow
+                    a template of:
+                </p>
+                <div class="code-box">
+                    <code>git@HOSTNAME:USERNAME/REPONAME.git</code>
+                </div>
+                <p>An example Git SSH URL would be:</p>
+                <div class="code-box"><code>git@bitbucket.org:rhyolight/javascript-data-store.git</code></div>
+                <p>where the template values match:</p>
+                <ul>
+                    <li>HOSTNAME: <code>bitbucket.org</code></li>
+                    <li>USERNAME: <code>rhyolight</code></li>
+                    <li>REPONAME: <code>javascript-data-store</code></li>
+                </ul>
+                <p>When executed, the latest version of the remote repo files on the master branch will be pulled down
+                    and added to a new folder. The new folder will be named after the REPONAME in this case
+                    <code>javascript-data-store</code>. The folder will contain the full history of the remote
+                    repository and a newly created master branch.
+                </p>
+                <span class="anchor-small" id="Configuration_&_set_up:_git_config"></span>
+                <header class="header header-m">Configuration & set up: git
+                    config</header>
+                <p>Once you have a remote repo setup, you will need to add a remote repo url to your local
+                    <code>git config</code>, and set an upstream branch for your local branches. The
+                    <code>git remote</code> command offers such utility.
+                </p>
+                <div class="code-box">
+                    <code>git remote add</code>
+                </div>
+                <p>This command will map remote repository at to a ref in your local repo under . Once you have mapped
+                    the remote repo you can push local branches to it.</p>
+                <div class="code-box">
+                    <code>git push -u</code>
+                </div>
+                <p>This command will push the local repo branch under to the remote repo at.</p>
+                <p>In addition to configuring a remote repo URL, you may also need to set global Git configuration
+                    options such as username, or email. The <code>git config</code> command lets you configure your Git
+                    installation (or an individual repository) from the command line. This command can define everything
+                    from user info, to preferences, to the behavior of a repository. Several common configuration
+                    options are listed below.</p>
+                <p>Git stores configuration options in three separate files, which lets you scope options to individual
+                    repositories (local), user (Global), or the entire system (system):</p>
+                <ul>
+                    <li>Local: <code>/.git/config</code> – Repository-specific settings.</li>
+                    <li>Global: <code>/.gitconfig</code> – User-specific settings. This is where options set with the
+                        --global flag are stored.</li>
+                    <li>System: <code>$(prefix)/etc/gitconfig</code> – System-wide settings.</li>
+                </ul>
+                <p>Define the author name to be used for all commits in the current repository. Typically, you’ll want
+                    to use the <code>--global</code> flag to set configuration options for the current user.</p>
+                <div class="code-box">
+                    <code>git config --global user.name</code>
+                </div>
+                <p>Define the author name to be used for all commits by the current user.</p>
+                <p>Adding the <code>--local</code> option or not passing a config level option at all, will set the
+                    <code>user.name</code> for the current local repository.
+                </p>
+                <div class="code-box">
+                    <code>git config --local user.email</code>
+                </div>
+                <p>Define the author email to be used for all commits by the current user.</p>
+                <div class="code-box">
+                    <code>git config --global alias.</code>
+                </div>
+                <p>Create a shortcut for a Git command. This is a powerful utility to create custom shortcuts for
+                    commonly used git commands. A simplistic example would be:</p>
+                <div class="code-box">
+                    <code>git config --global alias.ci commit</code>
+                </div>
+                <p>This creates a <code>ci</code> command that you can execute as a shortcut to <code>git commit</code>.
+                </p>
+                <div class="code-box">
+                    <code>git config --system core.editor</code>
+                </div>
+                <p>Define the text editor used by commands like <code>git commit</code> for all users on the current
+                    machine. The argument should be the command that launches the desired editor (e.g., vi). This
+                    example introduces the <code>--system</code> option. The <code>--system</code> option will set the
+                    configuration for the entire system, meaning all users and repos on a machine. </p>
+                <div class="code-box">
+                    <code>git config --global --edit</code>
+                </div>
+                <p>Open the global configuration file in a text editor for manual editing.</p>
+                <p>All configuration options are stored in plaintext files, so the <code>git config</code> command is
+                    really just a convenient command-line interface. Typically, you’ll only need to configure a Git
+                    installation the first time you start working on a new development machine, and for virtually all
+                    cases, you'll want to use the <code>--global</code> flag. One important exception is to override the
+                    author email address. You may wish to set your personal email address for personal and open source
+                    repositories, and your professional email address for work-related repositories.</p>
+                <p>Git stores configuration options in three separate files, which lets you scope options to individual
+                    repositories, users, or the entire system:</p>
+                <ul>
+                    <li><code>/.git/config</code> – Repository-specific settings.</li>
+                    <li><code>~/.gitconfig</code> – User-specific settings. This is where options set with the
+                        <code>--global</code> flag are stored.
+                    </li>
+                    <li><code>$(prefix)/etc/gitconfig</code> – System-wide settings.</li>
+                </ul>
+                <p>When options in these files conflict, local settings override user settings, which override
+                    system-wide. If you open any of these files, you’ll see something like the following:</p>
+                <div class="code-box">
+                    <code>[user] name = John Smith email = john@example.com [alias] st = status co = checkout br = branch up = rebase ci = commit [core] editor = vim</code>
+                </div>
+                <p>You can manually edit these values to the exact same effect as <code>git config.</code></p>
+            </article>
+        </section>
+
+
+        <section class="main-section">
+            <span class="anchor" id="Saving_changes"></span>
+            <header class="header header-l">Saving changes<div class="logo-div"><img
+                        src="https://i.postimg.cc/g2g67MnQ/Git-Logo-White.png" alt="The Git Logo"></div>
+            </header>
+            <article>
+                <p>When working in Git, or other version control systems, the concept of "saving" is a more nuanced
+                    process than saving in a word processor or other traditional file editing applications. The
+                    traditional software expression of "saving" is synonymous with the Git term "committing". A commit
+                    is the Git equivalent of a "save". Traditional saving should be thought of as a file system
+                    operation that is used to overwrite an existing file or write a new file. Alternatively, Git
+                    committing is an operation that acts upon a collection of files and directories.</p>
+                <p>Saving changes in Git vs SVN is also a different process. SVN Commits or 'check-ins' are operations
+                    that make a remote push to a centralized server. This means an SVN commit needs Internet access in
+                    order to fully 'save' project changes. Git commits can be captured and built up locally, then pushed
+                    to a remote server as needed using the <code>git push -u origin master</code> command. The
+                    difference between the two methods is a fundamental difference between architecture designs. Git is
+                    a distributed application model whereas SVN is a centralized model. Distributed applications are
+                    generally more robust as they do not have a single point of failure like a centralized server.</p>
+                <p>The commands: <code>git add</code>, <code>git status</code>, and <code>git commit</code> are all used
+                    in combination to save a snapshot of a Git project's current state.</p>
+                <span class="anchor-small" id="git_add"></span>
+                <header class="header header-m">git-add</header>
+                <p>The <code>git add</code> command adds a change in the working directory to the staging area. It tells
+                    Git that you want to include updates to a particular file in the next commit. However,
+                    <code>git add</code> doesn't really affect the repository in any significant way—changes are not
+                    actually recorded until you run <code>git commit</code>.
+                </p>
+                <p>In conjunction with these commands, you'll also need <code>git status</code> to view the state of the
+                    working directory and the staging area.</p>
+                <header class="header header-s">How it works</header>
+                <p>The <code>git add</code> and <code>git commit</code> commands compose the fundamental Git workflow.
+                    These are the two commands that every Git user needs to understand, regardless of their team’s
+                    collaboration model. They are the means to record versions of a project into the repository’s
+                    history.</p>
+                <p>Developing a project revolves around the basic edit/stage/commit pattern. First, you edit your files
+                    in the working directory. When you’re ready to save a copy of the current state of the project, you
+                    stage changes with <code>git add</code>. After you’re happy with the staged snapshot, you commit it
+                    to the project history with <code>git commit</code>. The <code>git reset</code> command is used to
+                    undo a commit or staged snapshot.</p>
+                <p>In addition to <code>git add</code> and <code>git commit</code>, a third command
+                    <code>git push</code> is essential for a complete collaborative Git workflow. <code>git push</code>
+                    is utilized to send the committed changes to remote repositories for collaboration. This enables
+                    other team members to access a set of saved changes.
+                </p>
+                <p>The <code>git add</code> command should not be confused with svn add, which adds a file to the
+                    repository. Instead, <code>git add</code> works on the more abstract level of changes. This means
+                    that <code>git add</code> needs to be called every time you alter a file, whereas svn add only needs
+                    to be called once for each file. It may sound redundant, but this workflow makes it much easier to
+                    keep a project organized.</p>
+                <span class="anchor-small" id="The_staging_area"></span>
+                <header class="header header-m">The staging area</header>
+                <p>The primary function of the <code>git add</code> command, is to promote pending changes in the
+                    working directory, to the <code>git staging area</code>. The staging area is one of Git's more
+                    unique features, and it can take some time to wrap your head around it if you’re coming from an SVN
+                    (or even a Mercurial) background. It helps to think of it as a buffer between the working directory
+                    and the project history. The staging area is considered one of the "three trees" of Git, along with,
+                    the working directory, and the commit history.</p>
+                <p>Instead of committing all of the changes you've made since the last commit, the stage lets you group
+                    related changes into highly focused snapshots before actually committing it to the project history.
+                    This means you can make all sorts of edits to unrelated files, then go back and split them up into
+                    logical commits by adding related changes to the stage and commit them piece-by-piece. As in any
+                    revision control system, it’s important to create atomic commits so that it’s easy to track down
+                    bugs and revert changes with minimal impact on the rest of the project.</p>
+                <header class="header header-s">Common options</header>
+                <div class="code-box">
+                    <code>git add</code>
+                </div>
+                <p>Stage all changes in <code>&#60;file&#62;</code> for the next commit.</p>
+                <div class="code-box">
+                    <code>git add</code>
+                </div>
+                <p>Stage all changes in <code>&#60;directory&#62;</code> for the next commit.</p>
+                <div class="code-box">
+                    <code>git add -p</code>
+                </div>
+                <p>Begin an interactive staging session that lets you choose portions of a file to add to the next
+                    commit. This will present you with a chunk of changes and prompt you for a command. Use
+                    <strong>y</strong> to stage the chunk, <strong>n</strong> to ignore the chunk, <strong>s</strong> to
+                    split it
+                    into smaller chunks, <strong>e</strong> to manually edit the chunk, and <strong>q</strong> to exit.
+                </p>
+                <header class="header header-s">Examples</header>
+                <p>When you’re starting a new project, <code>git add</code> serves the same function as
+                    <code>svn import</code>. To create an initial commit of the current directory, use the following two
+                    commands:
+                </p>
+                <div class="code-box">
+                    <code>git add . git commit</code>
+                </div>
+                <p>Once you’ve got your project up-and-running, new files can be added by passing the path to
+                    <code>git add</code>:
+                </p>
+                <div class="code-box">
+                    <code>git add hello.py git commit</code>
+                </div>
+                <p>The above commands can also be used to record changes to existing files. Again, Git doesn’t
+                    differentiate between staging changes in new files vs. changes in files that have already been added
+                    to the repository.</p>
+                <p>In review, <code>git add</code> is the first command in a chain of operations that directs Git to
+                    "save" a snapshot of the current project state, into the commit history. When used on its own,
+                    <code>git add</code> will promote pending changes from the working directory to the staging area.
+                    The <code>git status</code> command is used to examine the current state of the repository and can
+                    be used to confirm a git add promotion. The <code>git reset</code> command is used to undo a
+                    <code>git add</code>. The <code>git commit</code> command is then used to Commit a snapshot of the
+                    staging directory to the repositories commit history.
+                </p>
+            </article>
+        </section>
+
+        <section class="main-section">
+            <span class="anchor" id="Inspecting_a_repository"></span>
+            <header class="header header-l">Inspecting a repository<div class="logo-div"><img
+                        src="https://i.postimg.cc/g2g67MnQ/Git-Logo-White.png" alt="The Git Logo"></div>
+            </header>
+            <article>
+                <span class="anchor-small" id="git_status"></span>
+                <header class="header header-m">git status</header>
+            </article>
+            <p>The <code>git status</code> command displays the state of the working directory and the staging area. It
+                lets you see
+                which changes have been staged, which haven’t, and which files aren’t being tracked by Git. Status
+                output does <em>not</em> show you any information regarding the committed project history. For this, you
+                need to
+                use <code>git log</code>.</p>
+            <header class="header header-s">Related git commands</header>
+            <ul>
+                <li><code>git tag</code>
+                    <ul>
+                        <li>Tags are ref's that point to specific points in Git history. <code>git tag</code> is
+                            generally used to
+                            capture a point in history that is used for a marked version release (i.e. v1.0.1).</li>
+                    </ul>
+                </li>
+                <li>
+                    <code>git blame</code>
+                    <ul>
+                        <li>The high-level function of <code>git blame</code> is the display of author metadata attached
+                            to specific
+                            committed lines in a file. This is used to explore the history of specific code and answer
+                            questions about what, how, and why the code was added to a repository.</li>
+                    </ul>
+                </li>
+                <li>
+                    <code>git log</code>
+                    <ul>
+                        <li>The <code>git log</code> command displays committed snapshots. It lets you list the project
+                            history,
+                            filter it, and search for specific changes. </li>
+                    </ul>
+                </li>
+            </ul>
+            <header class="header header-s">Usage</header>
+            <div class="code-box">
+                <code>git status</code>
+            </div>
+            <p>List which files are staged, unstaged, and untracked.</p>
+            <p>The <code>git status</code> command is a relatively straightforward command. It simply shows you what's
+                been going on
+                with <code>git add</code> and <code>git commit</code>. Status messages also include relevant
+                instructions for staging/unstaging
+                files. Sample output showing the three main categories of a <code>git status</code> call is included
+                below:</p>
+            <div class="code-box">
+                <code># On branch master # Changes to be committed: # (use "git reset HEAD ..." to unstage) # #modified: hello.py # # Changes not staged for commit: # (use "git add ..." to update what will be committed) # (use "git checkout -- ..." to discard changes in working directory) # #modified: main.py # # Untracked files: # (use "git add ..." to include in what will be committed) # #hello.pyc</code>
+            </div>
+            <header class="header header-s">Ignoring files</header>
+            <p>Untracked files typically fall into two categories. They're either files that have just been added to the
+                project and haven't been committed yet, or they're compiled binaries like <code>.pyc</code>,
+                <code>.obj</code>, <code>.exe</code>, etc. While
+                it's definitely beneficial to include the former in the <code>git status</code> output, the latter can
+                make it hard
+                to see what’s actually going on in your repository.
+            </p>
+            <p>For this reason, Git lets you completely ignore files by placing paths in a special file called
+                <code>.gitignore</code>. Any files that you'd like to ignore should be included on a separate line, and
+                the * symbol
+                can be used as a wildcard. For example, adding the following to a <code>.gitignore</code> file in your
+                project root
+                will prevent compiled Python modules from appearing in <code>git status</code>:
+            </p>
+            <div class="code-box">
+                <code>*.pyc</code>
+            </div>
+            <header class="header header-s">Examples</header>
+            <p>It's good practice to check the state of your repository before committing changes so that you don't
+                accidentally commit something you don't mean to. This example displays the repository status before and
+                after staging and committing a snapshot:</p>
+            <div class="code-box">
+                <code># Edit hello.py git status # hello.py is listed under "Changes not staged for commit" git add hello.py git status # hello.py is listed under "Changes to be committed" git commit git status # nothing to commit (working directory clean)</code>
+            </div>
+            <p>The first status output will show the file as unstaged. The <code>git</code> add action will be reflected
+                in the
+                second <code>git status</code>, and the final status output will tell you that there is nothing to
+                commit—the working
+                directory matches the most recent commit. Some Git commands (e.g., <code>git merge</code>) require the
+                working
+                directory to be clean so that you don't accidentally overwrite changes.</p>
+            <span class="anchor-small" id="git_log"></span>
+            <header class="header header-m">git log</header>
+            <p>The <code>git log</code> command displays committed snapshots. It lets you list the project history,
+                filter it, and
+                search for specific changes. While <code>git status</code> lets you inspect the working directory and
+                the staging
+                area, <code>git log</code> only operates on the committed history.</p>
+            <p>Log output can be customized in several ways, from simply filtering commits to displaying them in a
+                completely user-defined format. Some of the most common configurations of <code>git log</code> are
+                presented below.</p>
+            <header class="header header-s">Usage</header>
+            <div class="code-box">
+                <code>git log</code>
+            </div>
+            <p>Display the entire commit history using the default formatting. If the output takes up more than one
+                screen, you can use <strong>Space</strong> to scroll and <strong>q</strong> to exit.</p>
+            <div class="code-box">
+                <code>git log -n</code>
+            </div>
+            <p>Limit the number of commits by . For example, <code>git log -3</code> will display only 3 commits.</p>
+            <div class="code-box">
+                <code>git log --oneline</code>
+            </div>
+            <p>Condense each commit to a single line. This is useful for getting a high-level overview of the project
+                history.</p>
+            <div class="code-box">
+                <code>git log --stat</code>
+            </div>
+            <p>Along with the ordinary <code>git log</code> information, include which files were altered and the
+                relative number of
+                lines that were added or deleted from each of them.</p>
+            <div class="code-box">
+                <code>git log -p</code>
+            </div>
+            <p>Display the patch representing each commit. This shows the full diff of each commit, which is the most
+                detailed view you can have of your project history.</p>
+            <div class="code-box">
+                <code>git log --author=""</code>
+            </div>
+            <p>Search for commits by a particular author. The argument can be a plain string or a regular expression.
+            </p>
+            <div class="code-box">
+                <code>git log --grep=""</code>
+            </div>
+            <p>Search for commits with a commit message that matches , which can be a plain string or a regular
+                expression.</p>
+            <div class="code-box">
+                <code>git log ..</code>
+            </div>
+            <p>Show only commits that occur between and . Both arguments can be either a commit ID, a branch name, HEAD,
+                or any other kind of revision reference.</p>
+            <div class="code-box">
+                <code>git log</code>
+            </div>
+            <p>Only display commits that include the specified file. This is an easy way to see the history of a
+                particular file.</p>
+            <div class="code-box">
+                <code>git log --graph --decorate --oneline</code>
+            </div>
+            <p>A few useful options to consider. The <code>--graph</code> flag that will draw a text based graph of the
+                commits on
+                the left hand side of the commit messages. <code>--decorate</code> adds the names of branches or tags of
+                the commits
+                that are shown. <code>--oneline</code> shows the commit information on a single line making it easier to
+                browse
+                through commits at-a-glance.</p>
+        </section>
+
+        <section class="main-section">
+            <span class="anchor" id="Undoing_changes"></span>
+            <header class="header header-l">Undoing changes<div class="logo-div"><img
+                        src="https://i.postimg.cc/g2g67MnQ/Git-Logo-White.png" alt="The Git Logo"></div>
+            </header>
+            <article>
+                <p>In this section, we will discuss the available 'undo' Git strategies and commands. It is first
+                    important to note that Git does not have a traditional 'undo' system like those found in a word
+                    processing application. It will be beneficial to refrain from mapping Git operations to any
+                    traditional 'undo' mental model. Additionally, Git has its own nomenclature for 'undo' operations
+                    that it is best to leverage in a discussion. This nomenclature includes terms like reset, revert,
+                    checkout, clean, and more.</p>
+                <p>A fun metaphor is to think of Git as a timeline management utility. Commits are snapshots of a point
+                    in time or points of interest along the timeline of a project's history. Additionally, multiple
+                    timelines can be managed through the use of branches. When 'undoing' in Git, you are usually moving
+                    back in time, or to another timeline where mistakes didn't happen.</p>
+                <p>This tutorial provides all of the necessary skills to work with previous revisions of a software
+                    project. First, it shows you how to explore old commits, then it explains the difference between
+                    reverting public commits in the project history vs. resetting unpublished changes on your local
+                    machine.</p>
+                <span class="anchor-small" id="Finding_what_is_lost:_reviewing_old_commits"></span>
+                <header class="header header-m">Finding what is lost:
+                    reviewing old commits</header>
+                <p>The whole idea behind any version control system is to store “safe” copies of a project so that you
+                    never have to worry about irreparably breaking your code base. Once you’ve built up a project
+                    history of commits, you can review and revisit any commit in the history. One of the best utilities
+                    for reviewing the history of a Git repository is the git log command. In the example below, we use
+                    <code>git log</code> to get a list of the latest commits to a popular open-source graphics library.
+                </p>
+                <div class="code-box">
+                    <code>git log --oneline e2f9a78fe Replaced FlyControls with OrbitControls d35ce0178 Editor: Shortcuts panel Safari support. 9dbe8d0cf Editor: Sidebar.Controls to Sidebar.Settings.Shortcuts. Clean up. 05c5288fc Merge pull request #12612 from TyLindberg/editor-controls-panel 0d8b6e74b Merge pull request #12805 from harto/patch-1 23b20c22e Merge pull request #12801 from gam0022/improve-raymarching-example-v2 fe78029f1 Fix typo in documentation 7ce43c448 Merge pull request #12794 from WestLangley/dev-x 17452bb93 Merge pull request #12778 from OndrejSpanel/unitTestFixes b5c1b5c70 Merge pull request #12799 from dhritzkiv/patch-21 1b48ff4d2 Updated builds. 88adbcdf6 WebVRManager: Clean up. 2720fbb08 Merge pull request #12803 from dmarcos/parentPoseObject 9ed629301 Check parent of poseObject instead of camera 219f3eb13 Update GLTFLoader.js 15f13bb3c Update GLTFLoader.js 6d9c22a3b Update uniforms only when onWindowResize 881b25b58 Update ProjectionMatrix on change aspect </code>
+                </div>
+                <p>Each commit has a unique SHA-1 identifying hash. These IDs are used to travel through the committed
+                    timeline and revisit commits. By default, <code>git log</code> will only show commits for the
+                    currently selected branch. It is entirely possible that the commit you're looking for is on another
+                    branch. You can view all commits across all branches by executing <code>git log --branches=*</code>.
+                    The command <code>git branch</code> is used to view and visit other branches. Invoking the command,
+                    <code>git branch -a</code> will return a list of all known branch names. One of these branch names
+                    can then be logged using <code>git log</code>.
+                </p>
+                <p>When you have found a commit reference to the point in history you want to visit, you can utilize the
+                    <code>git checkout</code> command to visit that commit. <code>Git checkout</code> is an easy way to
+                    “load” any of these saved snapshots onto your development machine. During the normal course of
+                    development, the HEAD usually points to master or some other local branch, but when you check out a
+                    previous commit, HEAD no longer points to a branch—it points directly to a commit. This is called a
+                    “detached HEAD” state.
+                </p>
+                <p>Checking out an old file does not move the HEAD pointer. It remains on the same branch and same
+                    commit, avoiding a 'detached head' state. You can then commit the old version of the file in a new
+                    snapshot as you would any other changes. So, in effect, this usage of <code>git checkout</code> on a
+                    file, serves
+                    as a way to revert back to an old version of an individual file.</p>
+                <span class="anchor-small" id="Viewing_an_old_revision"></span>
+                <header class="header header-m">Viewing an old revision</header>
+                <p>This example assumes that you’ve started developing a crazy experiment, but you’re not sure if you
+                    want to keep it or not. To help you decide, you want to take a look at the state of the project
+                    before you started your experiment. First, you’ll need to find the ID of the revision you want to
+                    see.</p>
+                <div class="code-box">
+                    <code>git log --oneline</code>
+                </div>
+                <p>Let’s say your project history looks something like the following:</p>
+                <div class="code-box">
+                    <code>b7119f2 Continue doing crazy things 872fa7e Try something crazy a1e8fb5 Make some important changes to hello.txt 435b61d Create hello.txt 9773e52 Initial import</code>
+                </div>
+                <p>You can use <code>git checkout</code> to view the “Make some import changes to hello.txt” commit as
+                    follows:</p>
+                <div class="code-box">
+                    <code>git checkout a1e8fb5</code>
+                </div>
+                <p>This makes your working directory match the exact state of the <code>a1e8fb5</code> commit. You can
+                    look at files,
+                    compile the project, run tests, and even edit files without worrying about losing the current state
+                    of the project. Nothing you do in here will be saved in your repository. To continue developing, you
+                    need to get back to the “current” state of your project:</p>
+                <div class="code-box">
+                    <code>git checkout master</code>
+                </div>
+                <p>This assumes that you're developing on the default master branch. Once you’re back in the master
+                    branch, you can use either <code>git revert</code> or <code>git reset</code> to undo any undesired
+                    changes.</p>
+                <span class="anchor-small" id="Undoing_a_committed_snapshot"></span>
+                <header class="header header-m">Undoing a committed snapshot</header>
+                <p>There are technically several different strategies to 'undo' a commit. The following examples will
+                    assume we have a commit history that looks like:</p>
+                <div class="code-box">
+                    <code>git log --oneline 872fa7e Try something crazy a1e8fb5 Make some important changes to hello.txt 435b61d Create hello.txt 9773e52 Initial import</code>
+                </div>
+                <p>We will focus on undoing the <code>872fa7e Try something crazy</code> commit. Maybe things got a
+                    little too crazy.</p>
+                <header class="header header-s">How to undo a commit with git checkout</header>
+                <p>Using the <code>git checkout</code> command we can checkout the previous commit,
+                    <code>a1e8fb5</code>, putting the repository
+                    in a state before the crazy commit happened. Checking out a specific commit will put the repo in a
+                    "detached HEAD" state. This means you are no longer working on any branch. In a detached state, any
+                    new commits you make will be orphaned when you change branches back to an established branch.
+                    Orphaned commits are up for deletion by Git's garbage collector. The garbage collector runs on a
+                    configured interval and permanently destroys orphaned commits. To prevent orphaned commits from
+                    being garbage collected, we need to ensure we are on a branch.
+                </p>
+                <p>
+
+                    From the detached HEAD state, we can execute
+                    <code
+                        style="overflow-x: auto; display: block">git checkout -b new_branch_without_crazy_commit</code>.
+                    This
+                    will create a new branch named <code>new_branch_without_crazy_commit</code> and switch to that
+                    state. The repo is
+                    now on a new history timeline in which the <code>872fa7e</code> commit no longer exists. At this
+                    point, we can
+                    continue work on this new branch in which the <code>872fa7e</code> commit no longer exists and
+                    consider it
+                    'undone'. Unfortunately, if you need the previous branch, maybe it was your master branch, this undo
+                    strategy is not appropriate. Let's look at some other 'undo' strategies.
+                </p>
+                <header class="header header-s">How to undo a public commit with git revert</header>
+                <p>Let's assume we are back to our original commit history example. The history that includes the
+                    <code>872fa7e</code> commit. This time let's try a revert 'undo'. If we execute
+                    <code>git revert HEAD</code>, Git will create
+                    a new commit with the inverse of the last commit. This adds a new commit to the current branch
+                    history and now makes it look like:
+                </p>
+                <div class="code-box">
+                    <code>git log --oneline e2f9a78 Revert "Try something crazy" 872fa7e Try something crazy a1e8fb5 Make some important changes to hello.txt 435b61d Create hello.txt 9773e52 Initial import</code>
+                </div>
+                <p>At this point, we have again technically 'undone' the <code>872fa7e</code> commit. Although
+                    <code>872fa7e</code> still exists in the history, the new <code>e2f9a78</code> commit is an inverse
+                    of the changes in <code>872fa7e</code>. Unlike our previous checkout strategy, we can continue using
+                    the same branch. This solution is a satisfactory undo. This is the ideal 'undo' method for working
+                    with public shared repositories. If you have requirements of keeping a curated and minimal Git
+                    history this strategy may not be satisfactory.
+                </p>
+                <header class="header header-s">How to undo a commit with git reset</header>
+                <p>For this undo strategy we will continue with our working example. <code>git reset</code> is an
+                    extensive command
+                    with multiple uses and functions. If we invoke <code>git reset --hard a1e8fb5</code> the commit
+                    history is reset
+                    to that specified commit. Examining the commit history with <code>git log</code> will now look like:
+                </p>
+                <div class="code-box">
+                    <code>git log --oneline a1e8fb5 Make some important changes to hello.txt 435b61d Create hello.txt 9773e52 Initial import</code>
+                </div>
+                <p>The log output shows the <code>e2f9a78</code> and <code>872fa7e</code> commits no longer exist in the
+                    commit history. At this
+                    point, we can continue working and creating new commits as if the 'crazy' commits never happened.
+                    This method of undoing changes has the cleanest effect on history. Doing a reset is great for local
+                    changes however it adds complications when working with a shared remote repository. If we have a
+                    shared remote repository that has the <code>872fa7e</code> commit pushed to it, and we try to
+                    <code>git push</code> a branch
+                    where we have reset the history, Git will catch this and throw an error. Git will assume that the
+                    branch being pushed is not up to date because of it's missing commits. In these scenarios, <code>git
+                    revert</code> should be the preferred undo method.
+                </p>
+                <span class="anchor-small" id="Undoing_the_last_commit"></span>
+                <header class="header header-m">Undoing the last commit</header>
+                <p>In the previous section, we discussed different strategies for undoing commits. These strategies are
+                    all applicable to the most recent commit as well. In some cases though, you might not need to remove
+                    or reset the last commit. Maybe it was just made prematurely. In this case you can amend the most
+                    recent commit. Once you have made more changes in the working directory and staged them for commit
+                    by using <code>git add</code>, you can execute <code>git commit --amend</code>. This will have Git
+                    open the configured system
+                    editor and let you modify the last commit message. The new changes will be added to the amended
+                    commit.
+                </p>
+                <header class="header header-s">The working directory</header>
+                <p>The working directory is generally in sync with the local file system. To undo changes in the working
+                    directory you can edit files like you normally would using your favorite editor. Git has a couple
+                    utilities that help manage the working directory. There is the <code>git clean</code> command which
+                    is a
+                    convenience utility for undoing changes to the working directory. Additionally,
+                    <code>git reset</code> can be
+                    invoked with the <code>--mixed</code> or <code>--hard</code> options and will apply a reset to the
+                    working directory.
+                </p>
+                <header class="header header-s">The staging index</header>
+                <p>The <code>git add</code> command is used to add changes to the staging index. <code>Git reset</code>
+                    is primarily used to undo
+                    the staging index changes. A <code>--mixed</code> reset will move any pending changes from the
+                    staging index back
+                    into the working directory.</p>
+                <header class="header header-s">Undoing public changes</header>
+                <p>When working on a team with remote repositories, extra consideration needs to be made when undoing
+                    changes. <code>Git reset</code> should generally be considered a 'local' undo method. A reset should
+                    be used when
+                    undoing changes to a private branch. This safely isolates the removal of commits from other branches
+                    that may be in use by other developers. Problems arise when a reset is executed on a shared branch
+                    and that branch is then pushed remotely with <code>git push</code>. Git will block the push in this
+                    scenario
+                    complaining that the branch being pushed is out of date from the remote branch as it is missing
+                    commits.</p>
+                <p>The preferred method of undoing shared history is <code>git revert</code>. A revert is safer than a
+                    reset because
+                    it will not remove any commits from a shared history. A revert will retain the commits you want to
+                    undo and create a new commit that inverts the undesired commit. This method is safer for shared
+                    remote collaboration because a remote developer can then pull the branch and receive the new revert
+                    commit which undoes the undesired commit.</p>
+            </article>
+            <header class="header header-s">Summary</header>
+            <p>We covered many high-level strategies for undoing things in Git. It's important to remember that there is
+                more than one way to 'undo' in a Git project. Most of the discussion on this page touched on deeper
+                topics that are more thoroughly explained on pages specific to the relevant Git commands. The most
+                commonly used 'undo' tools are <code>git checkout</code>, <code>git revert</code>, and
+                <code>git reset</code>. Some key points to remember are:
+            </p>
+            <ul>
+                <li>Once changes have been committed they are generally permanent</li>
+                <li>Use <code>git checkout</code> to move around and review the commit history</li>
+                <li><code>git revert</code> is the best tool for undoing shared public changes</li>
+                <li><code>git reset</code> is best used for undoing local private changes</li>
+            </ul>
+            <p>In addition to the primary undo commands, we took a look at other Git utilities: <code>git log</code> for
+                finding lost
+                commits <code>git clean</code> for undoing uncommitted changes <code>git add</code> for modifying the
+                staging index.</p>
+        </section>
+
+        <section class="main-section">
+            <span class="anchor" id="Rewriting_history"></span>
+            <header class="header header-l">Rewriting history<div class="logo-div"><img
+                        src="https://i.postimg.cc/g2g67MnQ/Git-Logo-White.png" alt="The Git Logo"></div>
+            </header>
+            <article>
+                <p>This tutorial will cover various methods of rewriting and altering Git history. Git uses a few
+                    different methods to record changes. We will discuss the strengths and weaknesses of the different
+                    methods and give examples of how to work with them. This tutorial discusses some of the most common
+                    reasons for overwriting committed snapshots and shows you how to avoid the pitfalls of doing so.</p>
+                <p>Git's main job is to make sure you never lose a committed change. But it's also designed to give you
+                    total control over your development workflow. This includes letting you define exactly what your
+                    project history looks like; however, it also creates the potential of losing commits. Git provides
+                    its history-rewriting commands under the disclaimer that using them may result in lost content.</p>
+                <p>Git has several mechanisms for storing history and saving changes. These mechanisms include: <code>Commit
+                    --amend</code>, <code>git rebase</code> and <code>git reflog</code>. These options give you
+                    powerful work flow customization options.
+                    By the end of this tutorial, you'll be familiar with commands that will let you restructure your Git
+                    commits, and be able to avoid pitfalls that are commonly encountered when rewriting history.</p>
+                <span class="anchor-small" id="Changing_the_Last_Commit:_git_commit_--amend"></span>
+                <header class="header header-m">Changing the Last
+                    Commit: git commit --amend</header>
+                <p>The <code>git commit --amend</code> command is a convenient way to modify the most recent commit. It
+                    lets you
+                    combine staged changes with the previous commit instead of creating an entirely new commit. It can
+                    also be used to simply edit the previous commit message without changing its snapshot. But, amending
+                    does not just alter the most recent commit, it replaces it entirely, meaning the amended commit will
+                    be a new entity with its own ref. To Git, it will look like a brand new commit, which is visualized
+                    with an asterisk (*) in the diagram below. There are a few common scenarios for using <code>git commit
+                    --amend</code>. We'll cover usage examples in the following sections.</p>
+                <header class="header header-s">Change most recent Git commit message </header>
+                <div class="code-box">
+                    <code>git commit --amend</code>
+                </div>
+                <p>Let's say you just committed and you made a mistake in your commit log message. Running this command
+                    when there is nothing staged lets you edit the previous commit’s message without altering its
+                    snapshot.</p>
+                <p>Premature commits happen all the time in the course of your everyday development. It’s easy to forget
+                    to stage a file or to format your commit message the wrong way. The <code>--amend</code> flag is a
+                    convenient way
+                    to fix these minor mistakes</p>
+                <div class="code-box">
+                    <code>git commit --amend -m "an updated commit message"</code>
+                </div>
+                <p>Adding the <code>-m</code> option allows you to pass in a new message from the command line without
+                    being prompted to open an editor.</p>
+                <header class="header header-s">Changing committed files</header>
+                <p>The following example demonstrates a common scenario in Git-based development. Let's say we've edited
+                    a few files that we would like to commit in a single snapshot, but then we forget to add one of the
+                    files the first time around. Fixing the error is simply a matter of staging the other file and
+                    committing with the <code>--amend</code> flag:</p>
+                <div class="code-box">
+                    <code># Edit hello.py and main.py git add hello.py git commit # Realize you forgot to add the changes from main.py git add main.py git commit --amend --no-edit </code>
+                </div>
+                <p>The <code>--no-edit</code> flag will allow you to make the amendment to your commit without changing
+                    its commit
+                    message. The resulting commit will replace the incomplete one, and it will look like we committed
+                    the changes to <code>hello.py</code> and <code>main.py</code> in a single snapshot.</p>
+                <header class="header header-s">Don’t amend public commits </header>
+                <p>Amended commits are actually entirely new commits and the previous commit will no longer be on your
+                    current branch. This has the same consequences as resetting a public snapshot. Avoid amending a
+                    commit that other developers have based their work on. This is a confusing situation for developers
+                    to be in and it’s complicated to recover from.</p>
+                <header class="header header-s">Recap</header>
+                <p>To review, <code>git commit --amend</code> lets you take the most recent commit and add new staged
+                    changes to it. You can add or remove changes from the Git staging area to apply with a <code>--amend
+                    commit</code>. If there are no changes staged, a <code>--amend</code> will still prompt you to
+                    modify the last commit
+                    message log. Be cautious when using <code>--amend</code> on commits shared with other team members.
+                    Amending a
+                    commit that is shared with another user will potentially require confusing and lengthy merge
+                    conflict resolutions.</p>
+                <span class="anchor-small" id="Changing_older_or_multiple_commits"></span>
+                <header class="header header-m">Changing older or multiple
+                    commits</header>
+                <p>To modify older or multiple commits, you can use <code>git rebase</code> to combine a sequence of
+                    commits into a
+                    new base commit. In standard mode, <code>git rebase</code> allows you to literally rewrite history —
+                    automatically applying commits in your current working branch to the passed branch head. Since your
+                    new commits will be replacing the old, it's important to not use <code>git rebase</code> on commits
+                    that have
+                    been pushed public, or it will appear that your project history disappeared.</p>
+                <p>In these or similar instances where it's important to preserve a clean project history, adding the
+                    <code>-i</code>
+                    option to git rebase allows you to run rebase interactive. This gives you the opportunity to alter
+                    individual commits in the process, rather than moving all commits.
+                </p>
+                <header class="header header-s">Changing committed files </header>
+                <p>During a rebase, the edit or <code>e</code> command will pause the rebase playback on that commit and
+                    allow you to
+                    make additional changes with <code>git commit --amend</code> Git will interrupt the playback and
+                    present a
+                    message:</p>
+                <div class="code-box">
+                    <code>Stopped at 5d025d1... formatting You can amend the commit now, with git commit --amend Once you are satisfied with your changes, run git rebase --continue </code>
+                </div>
+                <header class="header header-s">Multiple messages</header>
+                <p>Each regular Git commit will have a log message explaining what happened in the commit. These
+                    messages provide valuable insight into the project history. During a rebase, you can run a few
+                    commands on commits to modify commit messages.</p>
+                <ul>
+                    <li>Reword or <code>r</code> will stop rebase playback and let you rewrite the individual commit
+                        message during.</li>
+                    <li>Squash or <code>s</code> during rebase playback, any commits marked s will be paused on and you
+                        will be
+                        prompted to edit the separate commit messages into a combined message. More on this in the
+                        squash commits section below.</li>
+                    <li>Fixup or <code>f</code> has the same combining effect as squash. Unlike squash, fixup commits
+                        will not
+                        interrupt rebase playback to open an editor to combine commit messages. The commits marked 'f'
+                        will have their messages discarded in favor of the previous commit's message.</li>
+                </ul>
+                <header class="header header-s">Squash commits for a clean history </header>
+                <p>The <code>s</code> "squash" command is where we see the true utility of rebase. Squash allows you to
+                    specify which
+                    commits you want to merge into the previous commits. This is what enables a "clean history." During
+                    rebase playback, Git will execute the specified rebase command for each commit. In the case of
+                    squash commits, Git will open your configured text editor and prompt to combine the specified commit
+                    messages.</p>
+                <p>Note that the commits modified with a rebase command have a different ID than either of the original
+                    commits. Commits marked with pick will have a new ID if the previous commits have been rewritten.
+                </p>
+                <header class="header header-s">Recap</header>
+                <p>Git rebase gives you the power to modify your history, and interactive rebasing allows you to do so
+                    without leaving a “messy” trail. This creates the freedom to make and correct errors and refine your
+                    work, while still maintaining a clean, linear project history.
+                </p>
+                <span class="anchor-small" id="The_safety_net:_git_reflog"></span>
+                <header class="header header-m">The safety net: git reflog</header>
+                <p>Reference logs, or "reflogs" are a mechanism Git uses to record updates applied to tips of branches
+                    and other commit references. Reflog allows you to go back to commits even though they are not
+                    referenced by any branch or tag. After rewriting history, the reflog contains information about the
+                    old state of branches and allows you to go back to that state if necessary. Every time your branch
+                    tip is updated for any reason (by switching branches, pulling in new changes, rewriting history or
+                    simply by adding new commits), a new entry will be added to the reflog. In this section we will take
+                    a high level look at the <code>git reflog</code> command and explore some common uses.</p>
+                <div class="code-box">
+                    <code>git reflog</code>
+                </div>
+                <p>This displays the reflog for the local repository.</p>
+                <div class="code-box">
+                    <code>git reflog --relative-date</code>
+                </div>
+                <p>This shows the reflog with relative date information (e.g. 2 weeks ago).</p>
+                <header class="header header-s">Example</header>
+                <p>To understand <code>git reflog</code>, let's run through an example.</p>
+                <div class="code-box">
+                    <code>0a2e358 HEAD@{0}: reset: moving to HEAD~2 0254ea7 HEAD@{1}: checkout: moving from 2.2 to master c10f740 HEAD@{2}: checkout: moving from master to 2.2 </code>
+                </div>
+                <p>The reflog above shows a checkout from master to the 2.2 branch and back. From there, there's a hard
+                    reset to an older commit. The latest activity is represented at the top labeled
+                    <code>HEAD@{0}</code>.
+                </p>
+                <p>If it turns out that you accidentally moved back, the reflog will contain the commit master pointed
+                    to (0254ea7) before you accidentally dropped 2 commits.</p>
+                <div class="code-box">
+                    <code>git reset --hard 0254ea7</code>
+                </div>
+                <p>Using Git reset, it is now possible to change master back to the commit it was before. This provides
+                    a safety net in case the history was accidentally changed.</p>
+                <p>It's important to note that the reflog only provides a safety net if changes have been committed to
+                    your local repository and that it only tracks movements of the repositories branch tip. Additionally
+                    reflog entries have an expiration date. The default expiration time for reflog entries is 90 days.
+                </p>
+                <header class="header header-s">Summary</header>
+                <p>In this article we discussed several methods of changing git history, and undoing git changes. We
+                    took a high level look at the git rebase process. Some Key takeaways are:</p>
+                <ul>
+                    <li>There are many ways to rewrite history with git.</li>
+                    <li>Use <code>git commit --amend</code> to change your latest log message.</li>
+                    <li>Use git <code>commit --amend</code> to make modifications to the most recent commit.</li>
+                    <li>Use <code>git rebase</code> to combine commits and modify history of a branch.</li>
+                    <li><code>git rebase -i</code> gives much more fine grained control over history modifications than
+                        a standard git rebase.</li>
+                </ul>
+            </article>
+        </section>
+        <footer>
+            <p>This page was created for educational purposes only, as part of the <a
+                    href="https://www.freecodecamp.org/" target="_blank">freeCodeCamp</a> learning program. All the
+                content of this page is taken from <a
+                    href="https://www.atlassian.com/git/tutorials/what-is-version-control" target="_blank">Atlassian
+                    Git Tutorials</a>. The git logo is a creation of Jason Long and is licensed under the <a
+                    href="https://creativecommons.org/licenses/by/3.0/" target="_blank"> Creative Commons Attribution
+                    3.0 Unported License</a>. The <a href="https://github.com/marcocosta1618/git-tech-doc" target="_blank">code of this page</a> is hosted at GitHub</p>
+        </footer>
+    </main>
+    <!-- <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script> -->
+    <script src="toggleVisibility.js"></script>
+</body>
+
+</html>
