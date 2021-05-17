@@ -13,3 +13,4 @@ This page is [hosted on GitHub Pages](https://marcocosta1618.github.io/git-tech-
 
 ---
 
+![TechDoc_screenshot(60%)](https://user-images.githubusercontent.com/78434326/118456934-b5509080-b6f9-11eb-8ada-957620102848.jpg)
